@@ -14,7 +14,7 @@ $ go get -u -v github.com/dxtrleague/go-oauth2-mongo
 package main
 
 import (
-	"github.com/dxtrleague/go-oauth2-mongo"
+	"github.com/dxtrleague/go-oauth2-mongo/v4"
 	"github.com/go-oauth2/oauth2/v4/manage"
 )
 
