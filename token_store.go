@@ -8,8 +8,8 @@ import (
 	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
 	"github.com/globalsign/mgo/txn"
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/models"
+	"github.com/go-oauth2/oauth2/v4"
+	"github.com/go-oauth2/oauth2/v4/models"
 )
 
 // TokenConfig token configuration parameters

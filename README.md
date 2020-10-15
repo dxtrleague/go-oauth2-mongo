@@ -5,7 +5,7 @@
 ## Install
 
 ``` bash
-$ go get -u -v gopkg.in/go-oauth2/mongo.v3
+$ go get -u -v github.com/dxtrleague/go-oauth2-mongo
 ```
 
 ## Usage
@@ -14,8 +14,8 @@ $ go get -u -v gopkg.in/go-oauth2/mongo.v3
 package main
 
 import (
-	"gopkg.in/go-oauth2/mongo.v3"
-	"gopkg.in/oauth2.v3/manage"
+	"github.com/dxtrleague/go-oauth2-mongo"
+	"github.com/go-oauth2/oauth2/v4/manage"
 )
 
 func main() {

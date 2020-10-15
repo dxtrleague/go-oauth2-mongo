@@ -2,8 +2,8 @@ package mongo
 
 import (
 	"github.com/globalsign/mgo"
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/models"
+	"github.com/go-oauth2/oauth2/v4"
+	"github.com/go-oauth2/oauth2/v4/models"
 )
 
 // ClientConfig client configuration parameters
