@@ -1,6 +1,7 @@
 package mongo
 
 import (
+	"context"
 	"encoding/json"
 	"time"
 
@@ -97,7 +98,7 @@ func (ts *TokenStore) cHandler(name string, handler func(c *mgo.Collection)) {
 }
 
 // Create create and store the new token information
-func (ts *TokenStore) Create(info oauth2.TokenInfo) (err error) {
+func (ts *TokenStore) Create(cxt context.Context, info oauth2.TokenInfo) (err error) {
 	jv, err := json.Marshal(info)
 	if err != nil {
 		return
@@ -159,7 +160,7 @@ func (ts *TokenStore) Create(info oauth2.TokenInfo) (err error) {
 }
 
 // RemoveByCode use the authorization code to delete the token information
-func (ts *TokenStore) RemoveByCode(code string) (err error) {
+func (ts *TokenStore) RemoveByCode(cxt context.Context, code string) (err error) {
 	ts.cHandler(ts.tcfg.BasicCName, func(c *mgo.Collection) {
 		verr := c.RemoveId(code)
 		if verr != nil {
@@ -173,7 +174,7 @@ func (ts *TokenStore) RemoveByCode(code string) (err error) {
 }
 
 // RemoveByAccess use the access token to delete the token information
-func (ts *TokenStore) RemoveByAccess(access string) (err error) {
+func (ts *TokenStore) RemoveByAccess(cxt context.Context, access string) (err error) {
 	ts.cHandler(ts.tcfg.AccessCName, func(c *mgo.Collection) {
 		verr := c.RemoveId(access)
 		if verr != nil {
@@ -187,7 +188,7 @@ func (ts *TokenStore) RemoveByAccess(access string) (err error) {
 }
 
 // RemoveByRefresh use the refresh token to delete the token information
-func (ts *TokenStore) RemoveByRefresh(refresh string) (err error) {
+func (ts *TokenStore) RemoveByRefresh(cxt context.Context, refresh string) (err error) {
 	ts.cHandler(ts.tcfg.RefreshCName, func(c *mgo.Collection) {
 		verr := c.RemoveId(refresh)
 		if verr != nil {
@@ -244,7 +245,7 @@ func (ts *TokenStore) GetByCode(code string) (ti oauth2.TokenInfo, err error) {
 }
 
 // GetByAccess use the access token for token information data
-func (ts *TokenStore) GetByAccess(access string) (ti oauth2.TokenInfo, err error) {
+func (ts *TokenStore) GetByAccess(cxt context.Context, access string) (ti oauth2.TokenInfo, err error) {
 	basicID, err := ts.getBasicID(ts.tcfg.AccessCName, access)
 	if err != nil && basicID == "" {
 		return
@@ -254,7 +255,7 @@ func (ts *TokenStore) GetByAccess(access string) (ti oauth2.TokenInfo, err error
 }
 
 // GetByRefresh use the refresh token for token information data
-func (ts *TokenStore) GetByRefresh(refresh string) (ti oauth2.TokenInfo, err error) {
+func (ts *TokenStore) GetByRefresh(cxt context.Context, refresh string) (ti oauth2.TokenInfo, err error) {
 	basicID, err := ts.getBasicID(ts.tcfg.RefreshCName, refresh)
 	if err != nil && basicID == "" {
 		return
